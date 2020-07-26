@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="matchpassword" placeholder="Confirm password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+    <script>
+        {% if password != matchpassword %}
+            apology(message="Passwords do not match.")
+        {% else %}
+            rows = db.execute("SELECT * FROM users WHERE username == :username", username=request.form.get("username"))
+            if len(rows) != 1:
+
+                return render_template("login.html")
+            else:
+                apology(message="Username not available.")
+        {% endif %}
+    </script>
+{% endblock %}
+
+
+declare @date varchar(8)
+set @date = convert( varchar(8), getdate(), 112)
+
+declare @myNewName varchar(255) = 'LM_SM_Billing_and_Send_Data_' + @date
+
+exec sp_rename 'LM_SM_Billing_and_Send_Data', @myNewName

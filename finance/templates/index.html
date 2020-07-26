@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    It's the stock market, baby
+{% endblock %}
+
+{% block main %}
+    {% if toorich and not chopped: %}
+        <div class="alert alert-danger" role="alert">
+              <h3><b>Uh oh.</b> You have too much money.</h3><br><a href="/guillotine" class="alert-link">Let's fix that.</a><br>
+        </div>
+    {% endif %}
+    <h1>look at your stocks wow</h1><br><br>
+    <table width="100%" padding="10px" border= "1px solid black">
+        <tr><th>Symbol</th><th># Shares</th><th>Value Each</th><th>Total Value</th></tr>
+        <tr style="font-style:italic">
+            <td>CASH</td><td></td><td></td><td>{{ cash }}</td></tr>
+        </tr>
+        <tr>
+            {% for row in rows %}
+            <td>{{ row["symbol"] }}</td><td>{{ row["quantity"] }}</td><td>{{ row["value"] }}</td>
+            <td>{{ row["total"] }}</td></tr>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td><b>{{ assets }}</b></td>
+        </tr>
+    </table>
+    <br>
+{% endblock %}

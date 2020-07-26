@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Here's the Quote
+{% endblock %}
+
+{% block main %}
+    <h1>{{ symbol }}<br>{{ quote }}</h1>
+    <a href="/quote">Get another quote</a>
+{% endblock %}

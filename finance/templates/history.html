@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h1>Transaction History</h1><br>
+    <table width="100%" padding="10px" border= "1px solid black">
+        <tr><th>Symbol</th><th># Shares</th><th>Priced Each</th><th>Total Price</th><th>Date</th></tr>
+        <tr>
+            {% for row in rows %}
+                <td>{{ row["symbol"] }}</td>
+                <td>{{ row["quantity"] }}</td>
+                <td>{{ row["each"] }}</td>
+                <td>{{ row["total"] }}</td>
+                <td>{{ row['date'] }}</td></tr>
+            {% endfor %}
+        </tr>
+    </table>
+    <br>
+    <a href="/clear">Clear History</a><br>
+{% endblock %}
